@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamini Parmar | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. GLOBAL VARIABLES & RESET --- */
+        :root {
+            --primary-gradient: linear-gradient(to right, #a855f7, #6366f1);
+            --text-gradient: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            --bg-color: #050505;
+            --card-bg: #101010;
+            --text-color: #e0e0e0;
+            --muted-color: #a0a0a0;
+            --border-color: #2a2a2a;
+            --glow-color: rgba(255, 65, 108, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Image overlay dark background */
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: none;
+            /* darker = 0.7, lighter = 0.3 */
+            z-index: 1;
+        }
+
+        /* Text upar visible rahe */
+        .project-content {
+            position: relative;
+            z-index: 2;
+            background: black;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        #experience {
+            margin-top: 100px;
+        }
+
+        /* --- BACKGROUND ANIMATION (Floating Shapes) --- */
+        .area {
+            position: fixed;
+            /* Fixed so it stays while scrolling */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .circles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgb(0 209 255 / 20%);
+            /* Smoother transparency */
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        .circles li:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .circles li:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .circles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .circles li:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .circles li:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .circles li:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .circles li:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .circles li:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+
+        /* --- UTILITIES --- */
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .icon-svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            margin-right: 8px;
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border-color: #6366f1;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            background: linear-gradient(to right, #a855f7, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent !important;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--muted-color);
+            margin-bottom: 50px;
+            font-size: 1rem;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #a855f7, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            font-weight: 400;
+            z-index: 1;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: var(--muted-color);
+            margin-bottom: 30px;
+            z-index: 1;
+        }
+
+        .contact-pills {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .pill {
+            border: 1px solid #333;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            background: rgba(5, 5, 5, 0.8);
+            transition: 0.3s;
+        }
+
+        .pill:hover {
+            border-color: linear-gradient(to right, #a855f7, #6366f1);
+            color: white;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #a855f7, #6366f1);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, #ff4b2b, #a855f7);
+            box-shadow: 0 0 20px rgba(255, 75, 43, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #333;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #a855f7;
+            transform: translateY(-3px);
+        }
+
+        /* --- UPDATED ICONS FOR SKILLS SECTION --- */
+        .skill-card .icon-svg {
+            width: 24px;
+            /* Slightly larger for category titles */
+            height: 24px;
+            margin-right: 12px;
+            /* The fill color is inherited from the h3 text color (white) */
+        }
+
+        section#skills {
+            margin-bottom: 100px;
+        }
+
+        /* Specific colors for category icons to match the image */
+        .frontend-icon {
+            fill: #00f2fe;
+        }
+
+        /* Cyan */
+        .cms-icon {
+            fill: #4facfe;
+        }
+
+        /* Blue */
+        .backend-icon {
+            fill: #00f260;
+        }
+
+        /* Green */
+        .js-icon {
+            fill: #a855f7;
+        }
+
+        /* Purple */
+        /* --- SKILLS SECTION --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* 2 columns */
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: #1f1f1f;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #ddd;
+            border: 1px solid #333;
+        }
+
+        /* --- PROJECTS SECTION (Tabs & Grid) --- */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--muted-color);
+            padding: 8px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: linear-gradient(to right, #a855f7, #6366f1);
+            color: white;
+            border-color: linear-gradient(to right, #a855f7, #6366f1);
+            #ff416c;
+            box-shadow: 0 0 10px rgba(255, 65, 108, 0.3);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            display: block;
+            /* Default display */
+        }
+
+        .project-img {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #1e1e1e, #2a2a2a);
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-content h3 {
+            text-transform: capitalize;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .project-content p {
+            font-size: 0.9rem;
+            color: var(--muted-color);
+            margin-bottom: 15px;
+        }
+
+        .project-link {
+            color: #4facfe;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* --- UPDATED WORK EXPERIENCE TIMELINE --- */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* The Vertical Line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            /* Adjust line position */
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #2a2a2a;
+            /* Dark line color */
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            /* Space for dot and line */
+            margin-bottom: 50px;
+        }
+
+        /* The Blue Dot */
+        .timeline-dot {
+            position: absolute;
+            left: 11px;
+            /* Align with line center */
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: #00c6ff;
+            /* Cyan/Blue Dot */
+            border-radius: 50%;
+            border: 2px solid var(--bg-color);
+            /* Cutout effect */
+            box-shadow: 0 0 10px rgba(0, 198, 255, 0.6);
+        }
+
+        .timeline-card {
+            background: #111;
+            /* Dark Card */
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            border-color: #333;
+            transform: translateY(-2px);
+        }
+
+        /* Header: Role & Date */
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .role-title {
+            font-size: 1.4rem;
+            color: white;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .work-date {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Sub-header: Company & Location */
+        .company-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .company-name {
+            color: #00c6ff;
+            /* Cyan Text */
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .location-text {
+            color: #777;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Description List */
+        .work-desc {
+            margin-bottom: 20px;
+        }
+
+        .work-desc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .work-desc li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .work-desc li::before {
+            content: '•';
+            color: #00c6ff;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Tech Tags (Pills) */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: #bbb;
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+
+        .tech-tag:hover {
+            border-color: #00c6ff;
+            color: white;
+            background: rgba(0, 198, 255, 0.1);
+        }
+
+        /* Mobile Fix */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 10px;
+            }
+
+            .timeline-item {
+                padding-left: 35px;
+            }
+
+            .timeline-dot {
+                left: 3px;
+            }
+
+            .timeline-header,
+            .company-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* --- CONTACT --- */
+        /* --- UPDATED CONTACT SECTION DESIGN --- */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* Card Styles */
+        .contact-card {
+            background: #111;
+            /* Darker card bg */
+            border: 1px solid #222;
+            padding: 30px;
+            border-radius: 16px;
+            height: 100%;
+        }
+
+        .contact-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        /* Contact Info Items (Left Side) */
+        .contact-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .icon-box {
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 242, 254, 0.05);
+            /* Very light cyan tint */
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00f2fe;
+            /* Cyan icon color */
+            flex-shrink: 0;
+        }
+
+        .icon-box svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .info-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 0.95rem;
+            color: #fff;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .info-value a {
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .info-value a:hover {
+            color: #00f2fe;
+        }
+
+        /* Languages (Right Side) */
+        .lang-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1a1a1a;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .lang-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .lang-level {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* Interests (Right Side Bottom) */
+        .interests-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .interest-tag {
+            background: rgba(91, 58, 150, 0.2);
+            border: 1px solid #5b3a96;
+            color: #e0e0e0;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .interest-tag:hover {
+            background: #5b3a96;
+            color: white;
+        }
+
+        /* Bottom Banner */
+        .cta-banner {
+            background: linear-gradient(180deg, rgba(16, 16, 16, 0.8) 0%, rgba(10, 10, 10, 1) 100%);
+            border: 1px solid #222;
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 20px;
+            margin-top: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-cyan {
+            background: linear-gradient(to right, #4facfe, #a855f7);
+            color: #000;
+            font-weight: 700;
+            padding: 12px 30px;
+            border-radius: 6px;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* --- UPDATED EDUCATION SECTION --- */
+        .education-card {
+            background: #111;
+            /* Dark Card Background */
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s ease;
+        }
+
+        .education-card:hover {
+            border-color: #333;
+            transform: translateY(-2px);
+        }
+
+        /* Left Side: Icon + Degree Info */
+        .edu-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .edu-icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(139, 92, 246, 0.15);
+            /* Purple Tint */
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8b5cf6;
+            /* Purple Icon Color */
+            flex-shrink: 0;
+        }
+
+        .edu-icon-box svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .edu-info h3 {
+            font-size: 1.1rem;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .edu-info span {
+            color: #888;
+            font-size: 0.95rem;
+        }
+
+        /* Right Side: Date + Location */
+        .edu-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 140px;
+        }
+
+        .edu-meta {
+            color: #888;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .edu-meta svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+            opacity: 0.7;
+        }
+
+        /* Mobile Responsive for Education */
+        @media (max-width: 768px) {
+            .education-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .edu-right {
+                align-items: flex-start;
+                text-align: left;
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+                border-top: 1px solid #222;
+                padding-top: 15px;
+            }
+        }
+
+        .btn-cyan:hover {
+            background: #00c2cb;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Fix */
+        @media (max-width: 768px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+            border-top: 1px dashed #4b6c75;
+            color: #c7c7c7;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+
+            .edu-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <header class="hero container fade-in-up">
+        <h1>Kamini Parmar</h1>
+        <h2>Full-Stack Web Developer</h2>
+        <p>Specializing in WordPress, Laravel, Angular & Ionic with 2.5+ years of experience building scalable web
+            applications and custom solutions</p>
+
+        <div class="contact-pills">
+            <div class="pill">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                </svg>
+                kamini25501@gmail.com
+            </div>
+            <a href="#" class="pill" style="text-decoration: none;">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                        d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+                LinkedIn Profile
+            </a>
+            <div class="pill">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.12.35.03.75-.25 1.02l-2.2 2.2z" />
+                </svg>
+                9016542443
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-primary">Download Resume</button>
+            <a href="#projects" class="btn btn-secondary" style="text-decoration: none; display: inline-block;">View
+                Project</a>
+        </div>
+    </header>
+
+    <section id="skills" class="container">
+        <h2 class="section-title fade-in-up">Skills & Expertise</h2>
+        <p class="section-subtitle fade-in-up">A comprehensive toolkit for building modern web applications</p>
+
+        <div class="skills-grid">
+            <div class="skill-card hover-lift fade-in-up">
+                <h3>
+                    <svg class="icon-svg frontend-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
+                    </svg>
+                    Frontend Development
+                </h3>
+                <div class="tags">
+                    <span class="tag">HTML</span>
+                    <span class="tag">CSS</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">Bootstrap</span>
+                    <span class="tag">Responsive Design</span>
+                    <span class="tag">Figma to HTML</span>
+                    <span class="tag">UI & UX</span>
+                    <span class="tag">Basic Photoshop</span>
+                </div>
+            </div>
+
+            <div class="skill-card hover-lift fade-in-up">
+                <h3>
+                    <svg class="icon-svg cms-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
+                    </svg>
+                    CMS & E-Commerce
+                </h3>
+                <div class="tags">
+                    <span class="tag">WordPress</span><span class="tag">Shopify</span><span
+                        class="tag">WooCommerce</span><span class="tag">Elementor</span><span
+                        class="tag">WpBakery</span><span class="tag">Custom Themes
+                        & Plugins</span>
+                </div>
+            </div>
+
+            <div class="skill-card hover-lift fade-in-up">
+                <h3>
+                    <svg class="icon-svg backend-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M2 20h20v-4H2v4zm2-3h2v2H4v-2zM2 4v4h20V4H2zm4 3H4V5h2v2zm-4 7h20v-4H2v4zm2-3h2v2H4v-2z" />
+                    </svg>
+                    Backend & Frameworks
+                </h3>
+                <div class="tags">
+                    <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Laravel</span><span
+                        class="tag">CodeIgniter</span><span class="tag">RESTful APIs</span>
+                </div>
+            </div>
+
+            <div class="skill-card hover-lift fade-in-up">
+                <h3>
+                    <svg class="icon-svg js-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
+                    </svg>
+                    Modern JavaScript
+                </h3>
+                <div class="tags">
+                    <span class="tag">Angular</span><span class="tag">Ionic</span><span class="tag">API
+                        Integration</span><span class="tag">Mobile App Development</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2 class="section-title fade-in-up">Featured Projects</h2>
+        <p class="section-subtitle fade-in-up">Highlight works from my development journey</p>
+
+        <div class="tabs-container fade-in-up">
+            <button class="tab-btn active" data-filter="all">All Projects</button>
+            <button class="tab-btn" data-filter="wordpress">Wordpress</button>
+            <button class="tab-btn" data-filter="ecommerce">E-Commerce</button>
+            <button class="tab-btn" data-filter="shopify">Shopify</button>
+            <button class="tab-btn" data-filter="laravel">Laravel</button>
+            <button class="tab-btn" data-filter="ionic">Ionic + Angular</button>
+        </div>
+
+        <div class="project-grid">
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+
+                <div class="project-img">
+                    <img src="img/Compagnie-Sucrière.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Compagnie Sucrière</h3>
+                    <a href="https://csknwdev02.cskn.cd/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/wcmaa-1.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>4s karate</h3>
+                    <a href="https://www.4skarate.org/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="ecommerce">
+                <div class="project-img">
+                    <img src="img/Queen-Deli-4-1.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Queen Deli</h3><a href="https://queendeli.co.ke/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="ecommerce">
+                <div class="project-img">
+                    <img src="img/modiant.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Modiant Solutions</h3>
+                    <a href="https://www.modiantsolutions.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/umiyam.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Umiyam Trust</h3>
+                    <a href="https://umiyamtrust.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/buyers.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Buyers Team</h3>
+                    <a href="https://buyersteam.au/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/mytro.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Mytro</h3>
+                    <a href="https://mytro.in/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/sahaj.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Sahaj Ayurveda</h3>
+                    <a href="https://sahajayurveda.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/shargee.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Shargee</h3>
+                    <a href="https://shargee.co.in/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/disha.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Disha kidner science</h3>
+                    <a href="https://dishaks.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/ecxcel.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Tech Excel</h3>
+                    <a href="https://itechexcel.com" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/techrational.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>tech rational</h3>
+                    <a href="https://techrational.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="ecommerce">
+                <div class="project-img">
+                    <img src="img/sofya.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Sofiya</h3>
+                    <a href="https://sofya.store/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/raina.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Riana</h3>
+                    <a href="https://www.riana.co/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/my-learninf.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>My Learning Mantra</h3>
+                    <a href="https://mylearningmantra.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/excelsure.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Excelssure</h3>
+                    <a href="https://excelssure.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/infokids.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Info Kids School</h3>
+                    <a href="https://www.infokidsschool.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/space.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Space Agency</h3>
+                    <a href="https://spaceagency.in/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/ashapuri.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Ashapuri</h3>
+                    <a href="https://ashapuriindustries.in/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/jaynaratyan.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>jay narayan</h3>
+                    <a href="https://jnenergysolution.com" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/jord.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Jordbrukare</h3>
+                    <a href="https://www.jordbrukare.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="shopify">
+                <div class="project-img">
+                    <img src="img/pou-logo.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Pieceofyou</h3>
+                    <a href="https://pieceofyou.ae/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/iet.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Iet</h3>
+                    <a href="https://www.ietafrica.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/amaze.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Amaze Manors</h3>
+                    <a href="https://amazemanors.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/rt.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Real Time Conultans</h3>
+                    <a href="https://rtconsult.co.ke/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/missing.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>MisingiBora</h3>
+                    <a href="https://www.msingiborakindergarten.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/dr.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Dr. Punalur Prabhakaran</h3>
+                    <a href="https://drpunalurprabhakaran.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/fowlab.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>FlowerLab</h3>
+                    <a href="https://flowrlab.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="wordpress">
+                <div class="project-img">
+                    <img src="img/neo.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>NeoTrafo</h3>
+                    <a href="https://neotrafo.com" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="laravel">
+                <div class="project-img">
+                    <img src="img/online.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Online Property Expo</h3>
+                    <a href="https://onlinepropertyexpo.in/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="ecommerce">
+                <div class="project-img">
+                    <img src="img/canimeet.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Cabinerty</h3>
+                    <a href="https://cabinetrydirect.com.au/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="ecommerce">
+                <div class="project-img">
+                    <img src="img/radhe.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Radhe Prem Ni Mithaas</h3>
+                    <a href="https://www.premnimithaas.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="ecommerce">
+                <div class="project-img">
+                    <img src="img/turnix.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Turnix Electricals</h3>
+                    <a href="https://turnixelectricals.com" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="ecommerce">
+                <div class="project-img">
+                    <img src="img/little.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Little Sparkle</h3>
+                    <a href="https://thelittlesparkle.com/" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="ionic">
+                <div class="project-img">
+                    <img src="img/Crsytal-Frozen-1.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Crystal Frozen</h3>
+                    <a href="#" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="laravel">
+                <div class="project-img">
+                    <img src="img/cr.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>Crystal frozen Api Integration</h3>
+                    <a href="#" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card hover-lift fade-in-up" data-category="laravel">
+                <div class="project-img">
+                    <img src="img/pharma.jpg" alt="">
+                </div>
+                <div class="project-content">
+                    <h3>PharmaHome</h3>
+                    <a href="#" class="project-link" target="_blank">
+                        <svg class="icon-svg" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        View Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="container">
+        <h2 class="section-title fade-in-up" style="color: #00c6ff;">Work Experience</h2>
+        <p class="section-subtitle fade-in-up">Building innovative solutions across different technologies</p>
+
+        <div class="timeline">
+
+            <div class="timeline-item fade-in-up">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+
+                    <div class="timeline-header">
+                        <h3 class="role-title">Web and Hybrid App Development</h3>
+                        <span class="work-date">📅 2022 - Present</span>
+                    </div>
+
+                    <div class="company-row">
+                        <span class="company-name">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
+                            </svg>
+                            Tech Rational
+                        </span>
+                        <span class="location-text">📍 Landmark, Kudasan, Gandhinagar</span>
+                    </div>
+
+                    <div class="work-desc">
+
+                        <ul>
+                            <li><strong>WordPress Development (3+ Years):</strong>Specialized in building custom
+                                WordPress solutions, including themes, plugins, dynamic functionalities, and WooCommerce
+                                customizations. Strong experience in ACF, CPT, hooks & filters, API integrations, and
+                                performance optimization. Delivered multiple high-quality, SEO-friendly, and responsive
+                                WordPress websites with pixel-perfect UI using Elementor and custom components.</li>
+                            <li><strong>Frontend Development (HTML, CSS, JavaScript)</strong> Strong command over core
+                                frontend technologies — HTML5, CSS3, JavaScript (ES6+), responsive design, animations,
+                                and cross-browser compatibility. Skilled in creating clean UI layouts, modern styling
+                                using Flexbox/Grid, and enhancing user experience with interactive JS-based features.
+                                Experienced with Bootstrap, and custom styling for WordPress and standalone web apps.
+                            </li>
+                            <li><strong>Backend & Hybrid App Development (Laravel, Angular, Ionic – 1+
+                                    Year)</strong>Built RESTful APIs using Laravel with secure authentication,
+                                middleware, validations, and well-structured admin panels. Integrated Laravel APIs with
+                                Angular and Ionic applications, enabling smooth data flow and real-time functionality.
+                                Managed role-based access, token-based authentication, and API documentation for
+                                scalable systems.</li>
+                            <li><strong>Shopify Development:</strong>Worked on customizing Shopify themes, managing
+                                product catalogs, integrating payment gateways, and enhancing store UI/UX. Implemented
+                                custom sections, optimized loading speed, and handled Liquid-based theme modifications.
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">WordPress</span>
+                        <span class="tech-tag">WooCommerce</span>
+                        <span class="tech-tag">Elementor</span>
+                        <span class="tech-tag">Laravel</span>
+                        <span class="tech-tag">Angular</span>
+                        <span class="tech-tag">Ionic</span>
+                        <span class="tech-tag">REST APIs</span>
+                        <span class="tech-tag">Shopify</span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in-up">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+
+                    <div class="timeline-header">
+                        <h3 class="role-title">PHP Developer</h3>
+                        <span class="work-date">📅 June 2022 - September 2022</span>
+                    </div>
+
+                    <div class="company-row">
+                        <span class="company-name">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" />
+                            </svg>
+                            Riyank Technology
+                        </span>
+                        <span class="location-text">📍 Sargasan, Gandhinagar</span>
+                    </div>
+
+                    <div class="work-desc">
+                        <ul>
+                            <li>Developed and maintained PHP-based web applications.</li>
+                            <li>Collaborated with team members on various client projects.</li>
+                            <li>Implemented database solutions and API integrations.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">Core PHP</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in-up">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+
+                    <div class="timeline-header">
+                        <h3 class="role-title">PHP Developer (Internship)</h3>
+                        <span class="work-date">📅 December 2021 - May 2022</span>
+                    </div>
+
+                    <div class="company-row">
+                        <span class="company-name">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                            </svg>
+                            Green Circle Technology
+                        </span>
+                        <span class="location-text">📍 Meshana</span>
+                    </div>
+
+                    <div class="work-desc">
+                        <ul>
+                            <li>Gained hands-on experience in PHP development.</li>
+                            <li>Learned industry best practices and development workflows.</li>
+                            <li>Contributed to real-world projects under mentorship.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">Web Development</span>
+                        <span class="tech-tag">Internship</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="education" class="container">
+        <h2 class="section-title fade-in-up"
+            style="background: linear-gradient(to right, #a855f7, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            Education
+        </h2>
+        <p class="section-subtitle fade-in-up">Academic journey and qualifications</p>
+
+        <div class="education-card hover-lift fade-in-up">
+            <div class="edu-left">
+                <div class="edu-icon-box">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 3L1 9l11 6l9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z" />
+                    </svg>
+                </div>
+                <div class="edu-info">
+                    <h3>B.Tech (Computer Engineering)</h3>
+                    <span>Ganpat University - U. V. Patel College of Engineering</span>
+                </div>
+            </div>
+            <div class="edu-right">
+                <div class="edu-meta">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z" />
+                    </svg>
+                    2018 - 2022
+                </div>
+                <div class="edu-meta">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                    Meshana
+                </div>
+            </div>
+        </div>
+
+        <div class="education-card hover-lift fade-in-up">
+            <div class="edu-left">
+                <div class="edu-icon-box">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 3L1 9l11 6l9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z" />
+                    </svg>
+                </div>
+                <div class="edu-info">
+                    <h3>GSHEB (12th)</h3>
+                    <span>Matushri Kunvarba Ma Mahila Vidhyalaya</span>
+                </div>
+            </div>
+            <div class="edu-right">
+                <div class="edu-meta">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z" />
+                    </svg>
+                    2017 - 2018
+                </div>
+                <div class="edu-meta">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                    Palanpur
+                </div>
+            </div>
+        </div>
+
+        <div class="education-card hover-lift fade-in-up">
+            <div class="edu-left">
+                <div class="edu-icon-box">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 3L1 9l11 6l9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z" />
+                    </svg>
+                </div>
+                <div class="edu-info">
+                    <h3>GSEB (10th)</h3>
+                    <span>Matushri Kunvarba Ma Mahila Vidhyalaya</span>
+                </div>
+            </div>
+            <div class="edu-right">
+                <div class="edu-meta">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z" />
+                    </svg>
+                    2015 - 2016
+                </div>
+                <div class="edu-meta">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                    Palanpur
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <h2 class="section-title fade-in-up"
+            style="background: linear-gradient(to right, #4facfe, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            Get In Touch
+        </h2>
+        <p class="section-subtitle fade-in-up">Let's collaborate on your next project</p>
+
+        <div class="contact-layout fade-in-up">
+
+            <div class="contact-card hover-lift">
+                <h3>Contact Information</h3>
+
+                <div class="contact-row">
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                    </div>
+                    <div class="info-col">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">kamini25501@gmail.com</span>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.12.35.03.75-.25 1.02l-2.2 2.2z" />
+                        </svg>
+                    </div>
+                    <div class="info-col">
+                        <span class="info-label">Phone</span>
+                        <span class="info-value">+91 9016542443</span>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
+                    </div>
+                    <div class="info-col">
+                        <span class="info-label">Location</span>
+                        <span class="info-value">203-A, Godavari Apartments, Chandkheda, Ahmedabad, India</span>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                        </svg>
+                    </div>
+                    <div class="info-col">
+                        <span class="info-label">LinkedIn</span>
+                        <span class="info-value"><a href="https://linkedin.com/in/kamini-parmar-3275b62a4"
+                                target="_blank">linkedin.com/in/kamini-parmar-3275b62a4</a></span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 30px;">
+
+                <div class="contact-card hover-lift">
+                    <h3>
+                        <svg style="width:24px; height:24px; margin-right:10px; fill:#4facfe;" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                        </svg>
+                        Languages
+                    </h3>
+
+                    <div class="lang-row">
+                        <span class="lang-name">English</span>
+                        <span class="lang-level">Professional Working Proficiency</span>
+                    </div>
+                    <div class="lang-row">
+                        <span class="lang-name">Hindi</span>
+                        <span class="lang-level">Full Professional Proficiency</span>
+                    </div>
+                    <div class="lang-row">
+                        <span class="lang-name">Gujarati</span>
+                        <span class="lang-level">Native or Bilingual Proficiency</span>
+                    </div>
+                </div>
+
+                <div class="contact-card hover-lift">
+                    <h3>Interests</h3>
+                    <div class="interests-wrapper">
+                        <span class="interest-tag">Travelling</span>
+                        <span class="interest-tag">Music</span>
+                        <span class="interest-tag">Dance</span>
+                        <span class="interest-tag">Adventure</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="cta-banner fade-in-up">
+            <h3>Ready to start a project together?</h3>
+            <button class="btn-cyan">Send Me an Email</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Kamini Parmar. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // --- 1. Fade-in on Scroll ---
+        document.addEventListener("DOMContentLoaded", function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        });
+
+        // --- 2. Project Tab Filters ---
+        const filterButtons = document.querySelectorAll('.tab-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block'; // Show matched
+                        // Add animation reset for effect
+                        card.style.opacity = '0';
+                        setTimeout(() => card.style.opacity = '1', 50);
+                    } else {
+                        card.style.display = 'none'; // Hide unmatched
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
